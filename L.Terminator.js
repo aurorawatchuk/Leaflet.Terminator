@@ -120,18 +120,18 @@ L.Terminator = L.Polygon.extend({
 	var sunEclPos = this._sunEclipticPosition(julianDay);
 	var eclObliq = this._eclipticObliquity(julianDay);
 	var sunEqPos = this._sunEquatorialPosition(sunEclPos.lambda, eclObliq);
-	for (var i = 0; i <= 720 * this.options.resolution; i++) {
-	    lng = -360 + i / this.options.resolution;
+	for (var i = 0; i <= 1440 * this.options.resolution; i++) {
+	    lng = -720 + i / this.options.resolution;
 	    ha = this._hourAngle(lng, sunEqPos, gst);
 	    lat = this._latitude(ha, sunEqPos);
 	    latLng[i+1] = [lat, lng];
 	}
 	if (sunEqPos.delta < 0) {
-	    latLng[0] = [90, -360];
-	    latLng[latLng.length] = [90, 360];
+	    latLng[0] = [90, -720];
+	    latLng[latLng.length] = [90, 720];
 	} else {
-	    latLng[0] = [-90, -360];
-	    latLng[latLng.length] = [-90, 360];
+	    latLng[0] = [-90, -720];
+	    latLng[latLng.length] = [-90, 720];
 	}
 	return latLng;
     }
